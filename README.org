@@ -1,7 +1,7 @@
 #+TITLE: Salt Training
 
 * Launch Demo Environment
-1. Install =vagrant= (~zypper in vagrant~)
+1. Install =vagrant= (~zypper in vagrant libvirt vagrant-libvirt~)
 2. Clone this repository (~git clone git@github.com:agraul/salt-training
    salt-training && cd $_~)
 3. Add Vagrant boxes from OBS
@@ -9,12 +9,12 @@
 vagrant box add --name master https://download.opensuse.org/repositories/home:/agraul:/salt-images/images/Salt-Master.x86_64-15.3-libvirt-Build11.1.vagrant.libvirt.box
 vagrant box add --name minion https://download.opensuse.org/repositories/home:/agraul:/salt-images/images/Salt-Minion.x86_64-15.3-libvirt-Build12.1.vagrant.libvirt.box
    #+end_src
-4. Launch VMs (~vagrant up~)
+4. Ensure libvirt is running (~sudo systemctl enable --now libvirtd~)
+5. Launch VMs (~vagrant up~)
 
 * Connect to Salt Master
 1. Check that VMs are running (~vagrant status~)
-2. Connect via SSH (~vagrant ssh master -c 'sudo -i'~)
-3. Escalate Priviledges (~sudo -i~)
-4. Check connection to minions
+2. Connect via SSH (~vagrant ssh master -c "sudo -i"~)
+3. Check connection to minions
    a. Minions are not accepted yet: ~salt-key -L~
-   b. Minions are already accepted: ~salt '*' test.ping~
+   b. Minions are already accepted: ~salt "*" test.ping~
